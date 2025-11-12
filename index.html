@@ -1,24 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AndroidY</title>
+
+  <!-- Upgrade any http:// resource requests to https:// to avoid mixed-content blocking -->
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden;
+      /* allow scrolling if needed; iframe itself will show its own scrollbars */
+      overflow: auto;
     }
     iframe {
       width: 100%;
       height: 100%;
       border: none;
+      display: block;
     }
   </style>
 </head>
 <body>
-  <iframe src="http://androidy.lovable.app/" title="AndroidY"></iframe>
+  <!--
+    Use HTTPS to avoid mixed-content blocking when this page is served over HTTPS.
+    Added a few useful attributes:
+      - loading="lazy" to defer loading until needed
+      - allow for commonly required features (adjust as necessary)
+      - referrerpolicy to avoid passing the full referrer if desired
+    Note: If the remote site sets X-Frame-Options: DENY or X-Frame-Options: SAMEORIGIN (and it's a different origin),
+    the site cannot be embedded in an iframe — that is enforced by the remote server and cannot be overridden here.
+  -->
+  <iframe
+    src="https://androidy.lovable.app/"
+    title="AndroidY"
+    loading="lazy"
+    allow="fullscreen; geolocation; microphone; camera; autoplay; encrypted-media"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
 </body>
 </html>
